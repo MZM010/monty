@@ -18,11 +18,11 @@ int main(int argc, char *argv[])
 		exit(1);
 	}
 	my_file = fopen(argv[1], "r");
-    if (!my_file)
-    {
-        fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
-        exit(EXIT_FAILURE);
-    }
+	if (!my_file)
+	{
+		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
+		exit(EXIT_FAILURE);
+	}
 	i = 0;
 	while (fgets(buffer, sizeof(buffer), my_file) != NULL)
 	{
