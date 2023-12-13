@@ -32,6 +32,11 @@ stack_t *push_to_stack(stack_t *head, char *value)
 
 void pall(stack_t *head)
 {
+    if(!head)
+    {
+        free_stack(head);
+		exit(EXIT_FAILURE);
+    }
 	while (head != NULL)
 	{
 		printf("%d\n", head->n);
@@ -95,7 +100,8 @@ void pint(stack_t *head)
 {
 	if (!head)
 	{
-		fprintf(stderr, "L1 can't pint, stack empty\n");
+		fprintf(stderr, "L can't pint, stack empty\n");
+        free_stack(head);
 		exit(EXIT_FAILURE);
 	}
 	printf("%d\n", head->n);
