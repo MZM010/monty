@@ -32,11 +32,6 @@ stack_t *push_to_stack(stack_t *head, char *value)
 
 void pall(stack_t *head)
 {
-	if(!head)
-	{
-		free_stack(head);
-		exit(EXIT_FAILURE);
-	}
 	while (head != NULL)
 	{
 		printf("%d\n", head->n);
