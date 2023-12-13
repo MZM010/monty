@@ -95,8 +95,7 @@ void pint(stack_t *head)
 {
 	if (!head)
 	{
-		fprintf(stderr, "L can't pint, stack empty\n");
-		free_stack(head);
+		fprintf(stderr, "L1 can't pint, stack empty\n");
 		exit(EXIT_FAILURE);
 	}
 	printf("%d\n", head->n);
