@@ -1,38 +1,82 @@
 #include "monty.h"
+stack_t *head = NULL;
 /**
- * main - Main entry point for Stacks and Queues
- * @argc: Argument count for the matrix
- * @argv: Argument vector for the matrix
- * Return: 0 on success or other number if it fails
+ * main - execute monty files
+ * @argc: number of args
+ * @argv: args passed to programm
+ *
+ * Return: 0
  */
 int main(int argc, char *argv[])
 {
-	FILE *my_file;
-	char buffer[2048];
-	stack_t *head_node = NULL;
-	int line_number = 1, i;
-
 	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(1);
 	}
-	my_file = fopen(argv[1], "r");
-	if (!my_file)
-	{
-		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
-		exit(EXIT_FAILURE);
-	}
-	i = 0;
-	while (fgets(buffer, sizeof(buffer), my_file) != NULL)
-	{
-		for (; i < line_number; i++)
-		{
-			check_function(buffer, &head_node);
-		}
-		line_number++;
-	}
-	fclose(my_file);
-	free_stack(head_node);
+	open_file(argv[1]);
+	free_nodes();
 	return (0);
+}
+/**
+ * create_node - add new node
+ * @n: int value to add
+ *
+ * Return: pointer to node
+ */
+stack_t *create_node(int n)
+{
+	stack_t *node;
+
+	node = malloc(sizeof(stack_t));
+	if (node == NULL)
+		err(4);
+	node->next = NULL;
+	node->prev = NULL;
+	node->n = n;
+	return (node);
+}
+/**
+ * free_nodes - free linked list memory
+ *
+ * Return: nothing
+ */
+void free_nodes(void)
+{
+	stack_t *tmp;
+
+	if (head == NULL)
+		return;
+	while (head != NULL)
+	{
+		tmp = head;
+		head = head->next;
+		free(tmp);
+	}
+}
+/**
+ * add_to_queue - add node to queue
+ * @new_node: node to add
+ * @ln: line number
+ *
+ * Return: nothing
+ */
+void add_to_queue(stack_t **new_node, unsigned int ln)
+{
+	stack_t *tmp;
+	(void) ln;
+
+	if (new_node == NULL || *new_node == NULL)
+		exit(1);
+	if (head == NULL)
+	{
+		head = *new_node;
+		return;
+	}
+	tmp = head;
+	while (tmp->next != NULL)
+		tmp = tmp->next;
+
+	tmp->next = *new_node;
+	(*new_node)->prev = tmp;
 }

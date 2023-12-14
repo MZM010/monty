@@ -4,5 +4,6 @@
         "stdarg.h": "c",
         "unistd.h": "c",
         "stdlib.h": "c"
-    }
+    },
+    "C_Cpp.default.compilerPath": ""
 }
